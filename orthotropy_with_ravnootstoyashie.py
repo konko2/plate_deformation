@@ -40,7 +40,6 @@ class Timer:
 
 # TODO: (fix) if M % 2 then graph of sigma_x have bound near right corner
 def find_dots(h, a, M):
-    ravn_x = mp.linspace(0, h, M+2)[1:-1]
     ravn_y = mp.linspace(0, a, M+2)[1:-1]
     return {
         Borders.UPPER: {
@@ -49,15 +48,15 @@ def find_dots(h, a, M):
         },
         Borders.BOTTOM: {
             'sigma_x': [(h, y) for y in ravn_y],
-            'tau': [(h, y) for y in ravn_y],
+            'tau': [(h, y) for y in mp.linspace(0, a, M+2)[1:-1]],
         },
         Borders.LEFT: {
             'u': [(x, 0) for x in mp.linspace(0, h, M+3)[1:-1]],
-            'v': [(x, 0) for x in ravn_x],
+            'v': [(x, 0) for x in mp.linspace(0, h, M+4)[1:-1]],
         },
         Borders.RIGHT: {
             'u': [(x, a) for x in mp.linspace(0, h, M+3)[1:-1]],
-            'v': [(x, a) for x in mp.linspace(0, h, M+4)[1:-1]],
+            'v': [(x, a) for x in mp.linspace(0, h, M+2)[1:-1]],
         }
     }
 
@@ -141,7 +140,7 @@ from constants import Borders
 from mpmath import MPContext
 from functools import lru_cache
 
-M = 14
+M = 7
 mp = MPContext()
 mp.prec = 1500
 h = 5
